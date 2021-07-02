@@ -3,12 +3,14 @@ package com.github.arsengir.controller;
 import com.github.arsengir.model.Post;
 import com.github.arsengir.service.PostService;
 import com.google.gson.Gson;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
+@Controller
 public class PostController {
     public static final String APPLICATION_JSON = "application/json";
     private final PostService service;

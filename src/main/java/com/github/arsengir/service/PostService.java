@@ -3,9 +3,11 @@ package com.github.arsengir.service;
 import com.github.arsengir.exception.NotFoundException;
 import com.github.arsengir.model.Post;
 import com.github.arsengir.repository.PostRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PostService {
     private final PostRepository repository;
 
