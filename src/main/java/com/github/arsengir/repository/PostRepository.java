@@ -1,11 +1,13 @@
 package com.github.arsengir.repository;
 
 import com.github.arsengir.model.Post;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Repository
 public class PostRepository {
 
     private final Map<Long, Post> postMap = new ConcurrentHashMap<>();

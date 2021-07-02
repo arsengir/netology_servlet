@@ -3,6 +3,7 @@ package com.github.arsengir.servlet;
 import com.github.arsengir.controller.PostController;
 import com.github.arsengir.repository.PostRepository;
 import com.github.arsengir.service.PostService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +19,11 @@ public class MainServlet extends HttpServlet {
 
     @Override
     public void init() {
-        final PostRepository repository = new PostRepository();
-        final PostService service = new PostService(repository);
-        controller = new PostController(service);
+        final var context = new AnnotationConfigApplicationContext("com.github.arsengir");
+
+        final var repository = (PostRepository) context.getBean("postRepository");
+        final var service = (PostService) context.getBean("postService");
+        this.controller = (PostController) context.getBean("postController");
     }
 
     @Override
@@ -60,7 +63,7 @@ public class MainServlet extends HttpServlet {
     }
 
     private long getId(String path) {
-        return Long.parseLong(path.substring(path.lastIndexOf("/")+1));
+        return Long.parseLong(path.substring(path.lastIndexOf("/") + 1));
     }
 
 }
