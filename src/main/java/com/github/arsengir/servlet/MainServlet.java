@@ -1,8 +1,10 @@
 package com.github.arsengir.servlet;
 
+import com.github.arsengir.config.JavaConfig;
 import com.github.arsengir.controller.PostController;
 import com.github.arsengir.repository.PostRepository;
 import com.github.arsengir.service.PostService;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +20,11 @@ public class MainServlet extends HttpServlet {
 
     @Override
     public void init() {
-        final PostRepository repository = new PostRepository();
-        final PostService service = new PostService(repository);
-        controller = new PostController(service);
+        final var context = new AnnotationConfigApplicationContext(JavaConfig.class);
+
+        final PostRepository repository = (PostRepository) context.getBean("postRepository");
+        final PostService service = (PostService) context.getBean("postService");
+        controller = (PostController) context.getBean("postController");
     }
 
     @Override
